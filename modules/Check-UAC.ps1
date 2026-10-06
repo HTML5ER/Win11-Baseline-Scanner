@@ -4,9 +4,10 @@
     Проверяет наличие включенного UAC.
 #>
 
+$RegKey = Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
 function Check-EnableLUA {
-    $EnableLUA = Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA
-    $UacStatus = $EnableLUA.EnableLUA
+    $UacStatus = $RegKey.EnableLUA
     if ($UacStatus -eq 1) {
         return $true
     }
@@ -15,8 +16,7 @@ function Check-EnableLUA {
     }
 }
 function Check-UacBehavior {
-    $ConsentPromptBehaviorAdmin = Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name ConsentPromptBehaviorAdmin
-    $UacBehavior = $ConsentPromptBehaviorAdmin.ConsentPromptBehaviorAdmin
+    $UacBehavior = $RegKey.ConsentPromptBehaviorAdmin
     if ($UacBehavior -eq 2) {
         return $true
         }
