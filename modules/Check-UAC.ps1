@@ -41,7 +41,7 @@ function Check-Uac {
     }
     elseif ($Check2 -eq "Warning") {
          Write-Host "[WARNING] UAC работает, но с нестандартными настройками." -ForegroundColor Yellow
-         exit 0
+         exit 3
     }
     else {
      Write-Host "[CRITICAL] УЯЗВИМОСТЬ: UAC разрешает авто-повышение прав без запроса!" -ForegroundColor Red
